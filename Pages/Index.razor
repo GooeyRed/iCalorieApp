@@ -2,8 +2,29 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<p>Serving Size</p>
+<input type="number" @bind="ServingSize" @bind:event="oninput" />
+<br />
+<br />
 
-Welcome to your new app.
+<p>Serving Calories</p>
+<input type="number" @bind="ServingCalories" @bind:event="oninput" />
+<br />
+<br />
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<p>My Serving Size</p>
+<input type="number" @bind="MyServingSize" @bind:event="oninput" />
+<br />
+<br />
+
+
+<p>Total Calories</p>
+<label id="label">@(((Convert.ToDouble(ServingCalories) / Convert.ToDouble(ServingSize)) *  Convert.ToDouble(MyServingSize)).ToString("F"))</label>
+
+@code {
+        string ServingCalories = "0";
+        string ServingSize = "0";
+        string MyServingSize = "0";
+
+       
+}
