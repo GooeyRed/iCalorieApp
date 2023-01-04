@@ -3,28 +3,39 @@
 <PageTitle>Index</PageTitle>
 
 <p>Serving Size</p>
-<input type="number" @bind="ServingSize" @bind:event="oninput" />
+<input type="text" @bind="ServingSize" @bind:event="oninput" />
 <br />
 <br />
 
 <p>Serving Calories</p>
-<input type="number" @bind="ServingCalories" @bind:event="oninput" />
+<input type="text" @bind="ServingCalories" @bind:event="oninput" />
 <br />
 <br />
 
 <p>My Serving Size</p>
-<input type="number" @bind="MyServingSize" @bind:event="oninput" />
+<input type="text" @bind="MyServingSize" @bind:event="oninput" />
 <br />
 <br />
 
 
 <p>Total Calories</p>
-<label id="label">@(((Convert.ToDouble(ServingCalories) / Convert.ToDouble(ServingSize)) *  Convert.ToDouble(MyServingSize)).ToString("F"))</label>
+<label id="label">@(((Convert.ToDouble(ServingCalories == string.Empty ? 0 : ServingCalories) / Convert.ToDouble(ServingSize == string.Empty ? 0 : ServingSize)) *  Convert.ToDouble(MyServingSize == string.Empty ? 0 : MyServingSize)).ToString("F"))</label>
+<br />
+<br />
+
+<button class="btn btn-primary" @onclick="Clear">Clear</button>
+
 
 @code {
-        string ServingCalories = "0";
-        string ServingSize = "0";
-        string MyServingSize = "0";
+    string ServingCalories = "";
+    string ServingSize = "";
+    string MyServingSize = "";
 
-       
+    private void Clear()
+    {
+        ServingCalories  = string.Empty;
+        ServingSize = string.Empty;
+        MyServingSize = string.Empty;
+
+    }
 }
